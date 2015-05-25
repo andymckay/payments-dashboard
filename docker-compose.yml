@@ -1,0 +1,19 @@
+elk:
+  image: mozillapayments/elk
+  volumes:
+    - conf/logstash-forwarder.crt:/etc/pki/tls/certs/logstash-forwarder.crt
+    - conf/logstash-forwarder.key:/etc/pki/tls/private/logstash-forwarder.key
+  ports:
+    - "5601:5601"
+    - "9200:9200"
+  expose:
+    - "5000"
+
+logstash:
+  image: mozillapayments/logstash
+  volumes:
+    - conf/logstash-forwarder.conf:/etc/logstash/forwarder.conf
+    - conf/logstash-forwarder.crt:/etc/logstash/ssl/logstash-forwarder.crt
+    - data/logs:/data/logs
+  links:
+    - elk
