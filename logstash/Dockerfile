@@ -13,8 +13,10 @@ RUN \
     yum remove -y tar wget git golang && \
     yum clean all
 
-ENV LOGSTASH_IP 127.0.0.1
+ENV LOGSTASH_IP elk
 
 COPY container-files /
+COPY logstash-forwarder.conf /etc/logstash/forwarder.conf
+COPY logstash-forwarder.crt /etc/logstash/ssl/logstash-forwarder.crt
 
 CMD /start.sh

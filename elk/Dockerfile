@@ -80,8 +80,8 @@ ADD ./elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 
 # cert/key
 RUN mkdir -p /etc/pki/tls/certs && mkdir /etc/pki/tls/private
-ADD ./logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
-ADD ./logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
+ADD logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
+ADD logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
 
 # filters
 ADD ./01-lumberjack-input.conf /etc/logstash/conf.d/01-lumberjack-input.conf
@@ -100,6 +100,10 @@ RUN chown logstash:logstash /opt/logstash/patterns/*
 
 # Experiment by andy.
 RUN touch /var/log/logstash/logstash.log && chmod 0777 /var/log/logstash/logstash.log
+
+RUN mkdir -p /data/elasticsearch/
+# This is why I'm not an admin.
+RUN chmod 0777 /data/elasticsearch/
 
 ADD ./start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
