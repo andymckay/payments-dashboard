@@ -2,10 +2,5 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v. 
 
 This module includes source from:
 
-    https://github.com/spujadas/elk-docker
-
-Which is under an Apache license and from:
-
-    https://github.com/million12/docker-logstash-forwarder
-
-Currently trying to find out license on that one.
+    https://github.com/spujadas/elk-docker (Apache license)
+    https://github.com/million12/docker-logstash-forwarder (MIT license)
